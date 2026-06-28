@@ -29,12 +29,26 @@ function validateForm() {
 
         let patient = {
             name: name,
+            date: date,
+            allergies: alergies,
+            contact: contact,
             email: email,
             phone: phone
         };
 
         console.log(patient);
 
-        alert("Registration Successful!");
+        document.getElementById("message").innerHTML =
+            "Registration Successful!";
+
+        document.getElementById("patientInfo").innerHTML =
+            `
+        <p><b>Name:</b> ${patient.name}</p>
+        <p><b>Date of Birth:</b> ${patient.date}</p>
+        <p><b>Allergies:</b> ${patient.allergies}</p>
+        <p><b>Emergency Contact:</b> ${patient.contact}</p>
+        <p><b>Email:</b> ${patient.email}</p>
+        <p><b>Phone:</b> ${patient.phone}</p>
+        `;
     }
 }
