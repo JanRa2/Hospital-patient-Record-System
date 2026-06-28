@@ -18,21 +18,37 @@
 
     <h1>Patient Profile</h1>
 
-    <p>Name: John Doe</p>
-    <p>Blood Group: O+</p>
-    <p>Age: 25</p>
-
-    <h2>Medical Summary</h2>
-
-    <ul>
-        <li>Diabetes</li>
-        <li>Blood Pressure</li>
-        <li>Allergy: Penicillin</li>
-    </ul>
+    <div id="patientProfile">
+        Loading patient data...
+    </div>
 
     <a href="reports.html">
         <button>View Reports</button>
     </a>
+
+    <script>
+
+        let patient = JSON.parse(localStorage.getItem("patient"));
+
+        if (patient) {
+
+            document.getElementById("patientProfile").innerHTML = `
+        <h2>Patient Details</h2>
+
+        <p><b>Name:</b> ${patient.name}</p>
+        <p><b>Date of Birth:</b> ${patient.date}</p>
+        <p><b>Allergies:</b> ${patient.allergies}</p>
+        <p><b>Emergency Contact:</b> ${patient.contact}</p>
+        <p><b>Email:</b> ${patient.email}</p>
+        <p><b>Phone:</b> ${patient.phone}</p>
+    `;
+        }
+        else {
+            document.getElementById("patientProfile").innerHTML =
+                "No patient data found.";
+        }
+
+    </script>
 
 </body>
 
