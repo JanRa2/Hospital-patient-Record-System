@@ -26,19 +26,38 @@
             <th>Report</th>
         </tr>
 
-        <tr>
-            <td>10-07-2026</td>
-            <td>ABC Hospital</td>
-            <td>Blood Test</td>
-        </tr>
-
-        <tr>
-            <td>15-07-2026</td>
-            <td>XYZ Hospital</td>
-            <td>X-Ray</td>
-        </tr>
+        <tbody id="reportTable">
+        </tbody>
 
     </table>
+
+    <script>
+
+        let report =
+            JSON.parse(localStorage.getItem("report"));
+
+        if (report) {
+
+            document.getElementById("reportTable").innerHTML = `
+        <tr>
+            <td>${report.date}</td>
+            <td>${report.hospital}</td>
+            <td>${report.reportName}</td>
+        </tr>
+    `;
+        }
+        else {
+
+            document.getElementById("reportTable").innerHTML = `
+        <tr>
+            <td colspan="3">
+                No Reports Available
+            </td>
+        </tr>
+    `;
+        }
+
+    </script>
 
 </body>
 
