@@ -20,15 +20,79 @@
 
     <form>
 
-        <input type="file">
+        <form>
 
-        <br><br>
+            <label>Report Name:</label>
+            <input type="text" id="reportName">
 
-        <button type="submit">
-            Upload
-        </button>
+            <br><br>
+
+            <label>Hospital Name:</label>
+            <input type="text" id="hospital">
+
+            <br><br>
+
+            <label>Report Date:</label>
+            <input type="date" id="reportDate">
+
+            <br><br>
+
+            <label>Select Report:</label>
+            <input type="file" id="reportFile">
+
+            <br><br>
+
+            <button type="button" onclick="uploadReport()">
+                Upload
+            </button>
+
+        </form>
+
+        <p id="uploadMessage"></p>
 
     </form>
+
+    <script>
+
+        function uploadReport() {
+
+            let reportName =
+                document.getElementById("reportName").value;
+
+            let hospital =
+                document.getElementById("hospital").value;
+
+            let reportDate =
+                document.getElementById("reportDate").value;
+
+            if (
+                reportName === "" ||
+                hospital === "" ||
+                reportDate === ""
+            ) {
+                document.getElementById("uploadMessage").innerHTML =
+                    "Please fill all fields";
+                return;
+            }
+
+            let report = {
+                reportName: reportName,
+                hospital: hospital,
+                date: reportDate
+            };
+
+            localStorage.setItem(
+                "report",
+                JSON.stringify(report)
+            );
+
+            document.getElementById("uploadMessage").innerHTML =
+                "Report Uploaded Successfully";
+
+            console.log(report);
+        }
+
+    </script>
 
 </body>
 
