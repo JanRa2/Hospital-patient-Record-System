@@ -18,6 +18,10 @@
 
     <h1>Medical Reports</h1>
 
+    <input type="text" id="searchBox" placeholder="Search reports..." onkeyup="searchReports()">
+
+    <br><br>
+
     <table border="1">
 
         <tr>
@@ -36,37 +40,60 @@
         let reports =
             JSON.parse(localStorage.getItem("reports")) || [];
 
-        if (reports.length > 0) {
+        function displayReports(filteredReports) {
 
             let tableRows = "";
 
-            reports.forEach(function (report) {
+            if (filteredReports.length === 0) {
 
-                tableRows += `
+                tableRows = `
             <tr>
-                <td>${report.date}</td>
-                <td>${report.hospital}</td>
-                <td>${report.reportName}</td>
+                <td colspan="3">
+                    No Reports Found
+                </td>
             </tr>
         `;
+            }
+            else {
 
-            });
+                filteredReports.forEach(function (report) {
+
+                    tableRows += `
+                <tr>
+                    <td>${report.date}</td>
+                    <td>${report.hospital}</td>
+                    <td>${report.reportName}</td>
+                </tr>
+            `;
+
+                });
+
+            }
 
             document.getElementById("reportTable").innerHTML =
                 tableRows;
-
         }
-        else {
 
-            document.getElementById("reportTable").innerHTML = `
-        <tr>
-            <td colspan="3">
-                No Reports Available
-            </td>
-        </tr>
-    `;
+        function searchReports() {
 
+            let searchText =
+                document.getElementById("searchBox")
+                    .value
+                    .toLowerCase();
+
+            let filteredReports =
+                reports.filter(function (report) {
+
+                    return report.reportName
+                        .toLowerCase()
+                        .includes(searchText);
+
+                });
+
+            displayReports(filteredReports);
         }
+
+        displayReports(reports);
 
     </script>
 
