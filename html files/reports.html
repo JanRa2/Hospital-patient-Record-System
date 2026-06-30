@@ -33,18 +33,28 @@
 
     <script>
 
-        let report =
-            JSON.parse(localStorage.getItem("report"));
+        let reports =
+            JSON.parse(localStorage.getItem("reports")) || [];
 
-        if (report) {
+        if (reports.length > 0) {
 
-            document.getElementById("reportTable").innerHTML = `
-        <tr>
-            <td>${report.date}</td>
-            <td>${report.hospital}</td>
-            <td>${report.reportName}</td>
-        </tr>
-    `;
+            let tableRows = "";
+
+            reports.forEach(function (report) {
+
+                tableRows += `
+            <tr>
+                <td>${report.date}</td>
+                <td>${report.hospital}</td>
+                <td>${report.reportName}</td>
+            </tr>
+        `;
+
+            });
+
+            document.getElementById("reportTable").innerHTML =
+                tableRows;
+
         }
         else {
 
@@ -55,6 +65,7 @@
             </td>
         </tr>
     `;
+
         }
 
     </script>

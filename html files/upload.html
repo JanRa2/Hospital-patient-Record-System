@@ -81,9 +81,14 @@
                 date: reportDate
             };
 
+            let reports =
+                JSON.parse(localStorage.getItem("reports")) || [];
+
+            reports.push(report);
+
             localStorage.setItem(
-                "report",
-                JSON.stringify(report)
+                "reports",
+                JSON.stringify(reports)
             );
 
             document.getElementById("uploadMessage").innerHTML =
