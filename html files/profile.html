@@ -26,6 +26,12 @@
         <button>View Reports</button>
     </a>
 
+    <br><br>
+
+    <button onclick="editProfile()">
+        Edit Profile
+    </button>
+
     <script>
 
         let patient = JSON.parse(localStorage.getItem("patient"));
@@ -46,6 +52,36 @@
         else {
             document.getElementById("patientProfile").innerHTML =
                 "No patient data found.";
+        }
+
+        function editProfile() {
+
+            let patient =
+                JSON.parse(localStorage.getItem("patient"));
+
+            let newPhone =
+                prompt("Enter new phone number:", patient.phone);
+
+            if (newPhone) {
+
+                if (!/^\d{10}$/.test(newPhone)) {
+
+                    alert("Phone number must contain exactly 10 digits only");
+                    return;
+
+                }
+
+                patient.phone = newPhone;
+
+                localStorage.setItem(
+                    "patient",
+                    JSON.stringify(patient)
+                );
+
+                alert("Profile Updated Successfully");
+
+                location.reload();
+            }
         }
 
     </script>
